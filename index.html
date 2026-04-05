@@ -2,116 +2,135 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Warning Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Security Notice</title>
+
 <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: #fafafa;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #fafafa;
+    overflow: hidden;
+}
 
-    .container {
-        display: none;
-        text-align: center;
-        padding: 30px;
-        border: 1px solid #ddd;
-        border-radius: 12px;
-        background: white;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        width: 320px;
-        z-index: 2;
-    }
+/* POPUP BESAR (HP FRIENDLY) */
+.container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
-    .logo {
-        font-size: 28px;
-        font-weight: bold;
-        background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
-        -webkit-background-clip: text;
-        color: transparent;
-        margin-bottom: 20px;
-    }
+    background: white;
+    padding: 30px 20px;
 
-    .warning {
-        color: red;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-    .desc {
-        font-size: 14px;
-        color: #333;
-        margin-bottom: 20px;
-    }
+    text-align: center;
+    z-index: 10;
+}
 
-    .btn {
-        padding: 10px 20px;
-        border: none;
-        background: #e53935;
-        color: white;
-        border-radius: 6px;
-        cursor: pointer;
-    }
+/* LOGO */
+.logo {
+    font-size: 34px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af, #515bd4);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+}
 
-    .btn:hover {
-        background: #c62828;
-    }
+/* TITLE */
+.warning {
+    font-size: 22px;
+    color: red;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
 
-    /* Overlay gambar */
-    .scary {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url('scary.jpg') center/cover no-repeat;
-        display: none;
-        z-index: 999;
-    }
+/* DESC */
+.desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 25px;
+}
 
-    /* Text glitch container */
-    .glitch-container {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        pointer-events: none;
-    }
+/* BUTTON */
+.btn {
+    padding: 14px 25px;
+    font-size: 16px;
+    border: none;
+    background: #e53935;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
 
-    .glitch {
-        color: red;
-        font-size: 20px;
-        font-weight: bold;
-        margin: 5px;
-        animation: glitch 0.3s infinite;
-    }
+.btn:active {
+    background: #b71c1c;
+}
 
-    @keyframes glitch {
-        0% { transform: translate(0); opacity: 1; }
-        25% { transform: translate(-2px, 2px); opacity: 0.8; }
-        50% { transform: translate(2px, -2px); opacity: 1; }
-        75% { transform: translate(-1px, 1px); opacity: 0.6; }
-        100% { transform: translate(0); opacity: 1; }
-    }
+/* SCARY SCREEN */
+.scary {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: url('scary.jpg') center/cover no-repeat;
+    display: none;
+    z-index: 999;
+}
+
+/* GLITCH TEXT */
+.glitch-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.glitch {
+    color: red;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 4px;
+    animation: glitch 0.25s infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    25% { transform: translate(-2px, 2px); }
+    50% { transform: translate(2px, -2px); }
+    75% { transform: translate(-1px, 1px); }
+    100% { transform: translate(0); }
+}
 </style>
 </head>
+
 <body>
 
 <div class="container" id="warningBox">
     <div class="logo">Instagram</div>
-    <div class="warning">? Account Warning</div>
+
+    <div class="warning">Security Notice</div>
+
     <div class="desc">
-        Your account has been flagged for suspicious activity.<br>
+        We detected activity that may not follow our guidelines.<br><br>
+        Your account will be reviewed within 3 days.<br>
         Please review your activity to avoid restrictions.
     </div>
-    <button class="btn" onclick="triggerScary()">Cancel</button>
+
+    <button class="btn" onclick="triggerScary()">Continue</button>
 </div>
 
 <div class="scary" id="scaryScreen">
@@ -119,30 +138,37 @@
 </div>
 
 <audio id="scarySound">
-    <source src="Evil Laugh Sound Effect - N10's Random Content (128k).mp3" type="audio/mpeg">
+    <source src="sound.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-    window.onload = function() {
-        alert("Your account has after 3 days");
-        document.getElementById("warningBox").style.display = "block";
-    };
+window.onload = function() {
+    setTimeout(() => {
+        alert("Your account will be reviewed within 3 days.");
+        document.getElementById("warningBox").style.display = "flex";
+    }, 800);
+};
 
-    function triggerScary() {
-        document.getElementById("scaryScreen").style.display = "block";
+function triggerScary() {
+    document.getElementById("scaryScreen").style.display = "block";
 
-        let sound = document.getElementById("scarySound");
-        sound.play();
+    let sound = document.getElementById("scarySound");
+    sound.play().catch(() => {});
 
-        // Generate banyak teks STUPID
-        let container = document.getElementById("glitchContainer");
-        for (let i = 0; i < 100; i++) {
-            let span = document.createElement("span");
-            span.className = "glitch";
-            span.innerText = "STUPID";
-            container.appendChild(span);
-        }
+    let container = document.getElementById("glitchContainer");
+
+    for (let i = 0; i < 120; i++) {
+        let span = document.createElement("span");
+        span.className = "glitch";
+        span.innerText = "STUPID";
+        container.appendChild(span);
     }
+
+    // getar HP (kalau support)
+    if (navigator.vibrate) {
+        navigator.vibrate([200,100,200,100,300]);
+    }
+}
 </script>
 
 </body>
